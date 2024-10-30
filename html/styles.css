@@ -1,0 +1,279 @@
+/* Reset and Base Styles */
+* { /* เลือกทุก element */
+    margin: 0; /* ตั้งค่าระยะห่างรอบนอก (margin) เป็น 0 */
+    padding: 0; /* ตั้งค่าระยะห่างภายใน (padding) เป็น 0 */
+    box-sizing: border-box; /* รวม border และ padding เข้าไปในขนาดของ element */
+}
+body {
+    font-family: Arial, sans-serif; /* ตั้งค่า font เป็น Arial หากไม่มี ให้ใช้ sans-serif */
+    color: #333; /* ตั้งค่าสีตัวอักษรเป็นสีเทาเข้ม */
+    background-color: #f5f5f5; /* ตั้งค่าสีพื้นหลังเป็นสีเทาอ่อน */
+}
+
+/* Header Styling */
+header {
+    display: flex; /* จัด layout ให้ element ภายใน header เป็น flexbox */
+    justify-content: space-between; /* กระจายพื้นที่ระหว่าง child elements ในแนวนอน */
+    align-items: center; /* จัดตำแหน่ง element ทั้งหมดให้อยู่กึ่งกลางในแนวตั้ง */
+    padding: 15px 30px; /* ระยะห่างภายในด้านบนและล่าง 15px, ซ้ายและขวา 30px */
+    background-color: #222; /* สีพื้นหลังของ header เป็นสีดำเข้ม */
+    border-bottom: 1px solid #ddd; /* เส้นขอบด้านล่างของ header */
+    color: #fff; /* สีตัวอักษรเป็นสีขาว */
+    position: relative; /* ตำแหน่ง relative สำหรับใช้งานการเลื่อน sticky */
+    transition: all 0.3s ease; /* ตั้งค่า transition เวลามีการเปลี่ยนแปลง 0.3 วินาที */
+    z-index: 1000; /* กำหนดลำดับชั้นเพื่อให้อยู่ด้านหน้าของ element อื่นๆ */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* เงาของ header */
+}
+header.sticky {
+    position: fixed; /* ตำแหน่ง fixed เพื่อให้ header ติดอยู่ด้านบน */
+    top: 0; /* ตำแหน่งที่ด้านบนสุด */
+    width: 100%; /* ความกว้างเต็มหน้าจอ */
+    animation: slideDown 0.5s ease forwards; /* ใช้ animation slideDown */
+    background-color: rgba(34, 34, 34, 0.9); /* สีพื้นหลังแบบโปร่งใส */
+}
+
+@keyframes slideDown { /* การสร้าง keyframe สำหรับ slideDown */
+    from {
+        opacity: 0; /* เริ่มจากความโปร่งใส */
+        transform: translateY(-100%); /* เริ่มจากตำแหน่งนอกจอด้านบน */
+    }
+    to {
+        opacity: 1; /* สิ้นสุดที่โปร่งใส */
+        transform: translateY(0); /* กลับมาที่ตำแหน่งเดิม */
+    }
+}
+
+/* Navigation Styles */
+.logo {
+    display: flex; /* ใช้ flex layout */
+    align-items: center; /* จัดให้อยู่กึ่งกลาง */
+    font-size: 24px; /* ขนาด font ของโลโก้ */
+    font-weight: bold; /* ตัวอักษรหนา */
+    cursor: pointer; /* เปลี่ยน cursor เมื่อชี้ */
+}
+.logo img {
+    width: 40px; /* กำหนดความกว้างภาพโลโก้ */
+    margin-right: 10px; /* ระยะห่างด้านขวา */
+    border-radius: 50%; /* ทำภาพให้เป็นวงกลม */
+}
+nav ul {
+    display: flex; /* จัด layout เป็น flex */
+    list-style: none; /* ไม่มีสัญลักษณ์หน้ารายการ */
+    gap: 20px; /* ระยะห่างระหว่างรายการ */
+}
+nav ul li a {
+    text-decoration: none; /* ไม่มีเส้นใต้ */
+    color: #fff; /* สีตัวอักษรขาว */
+    font-weight: 500; /* น้ำหนักตัวอักษร */
+    padding: 8px 16px; /* ระยะห่างภายใน */
+    border-radius: 4px; /* ขอบโค้งมน */
+    cursor: pointer; /* แสดง cursor เป็น pointer */
+}
+nav ul li a:hover,
+.fb {
+    background-color: #E35205; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+    color: #fff; /* สีตัวอักษรขาว */
+}
+
+.hero {
+    display: flex; /* จัด layout ภายในเป็น flex */
+    align-items: center; /* จัดให้อยู่กึ่งกลาง */
+    justify-content: space-between; /* จัดระยะห่างระหว่าง elements */
+    padding: 4rem 2rem; /* ระยะห่างภายใน */
+    background: url('img/solar_1.jpeg') no-repeat center center; /* ภาพพื้นหลัง */
+    background-size: cover; /* ให้ภาพเต็มจอ */
+    height: 100vh; /* สูงเต็มหน้าจอ */
+    color: #333; /* สีตัวอักษร */
+    position: relative; /* ตำแหน่ง relative */
+    overflow: hidden; /* ซ่อนส่วนเกิน */
+}
+
+.hero::before { /* pseudo-element สำหรับการซ้อนทับ */
+    content: ""; /* กำหนดเนื้อหาของ pseudo-element ให้เป็นว่าง */
+    position: absolute; /* กำหนดตำแหน่งแบบ absolute เพื่อให้วางอยู่เหนือองค์ประกอบอื่น */
+    top: 0; /* กำหนดระยะห่างจากด้านบนเป็น 0 */
+    left: 0; /* กำหนดระยะห่างจากด้านซ้ายเป็น 0 */
+    width: 100%; /* กำหนดความกว้างเป็น 100% ขององค์ประกอบแม่ */
+    height: 100%; /* กำหนดความสูงเป็น 100% ขององค์ประกอบแม่ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 70%); /* สร้างพื้นหลังเป็นกราเดียนต์จากสีขาวที่มีความทึบ 90% ไปเป็นโปร่งใส */
+    z-index: 1; /* กำหนดลำดับการซ้อนทับให้อยู่ด้านหลัง */
+}
+
+.hero-text {
+    max-width: 50%; /* จำกัดความกว้างสูงสุดที่ 50% ของพื้นที่แม่ */
+    z-index: 2; /* กำหนดลำดับการซ้อนทับให้อยู่ด้านหน้า */
+    position: relative; /* กำหนดตำแหน่งแบบ relative เพื่อให้สามารถซ้อนทับกับ pseudo-element ได้ */
+    color: #000; /* กำหนดสีตัวอักษรเป็นสีดำ */
+}
+
+.hero-text h1 {
+    font-size: 128px; /* กำหนดขนาดตัวอักษรเป็น 128px */
+    font-weight: bold; /* กำหนดความหนาของตัวอักษรให้หนา */
+    line-height: 1.2; /* กำหนดความสูงของบรรทัดเป็น 1.2 เท่าของขนาดตัวอักษร */
+}
+
+.hero-text p {
+    font-size: 36px; /* กำหนดขนาดตัวอักษรสำหรับพารากราฟเป็น 36px */
+    margin: 20px 0; /* กำหนดระยะห่างด้านบนและล่างเป็น 20px */
+    max-width: auto; /* ความกว้างสูงสุดที่ไม่จำกัด */
+    color: #666; /* กำหนดสีตัวอักษรเป็นสีเทาเข้ม */
+} 
+
+.hero-text a {
+    display: block; /* แสดงลิงก์เป็นบล็อกเพื่อให้สามารถกำหนดขนาดได้ */
+    width: 90px; /* กำหนดความกว้างเป็น 90px */
+}
+
+.explore-btn {
+    padding: 10px 20px; /* กำหนดระยะห่างภายในปุ่มเป็น 10px ด้านบนและล่าง และ 20px ด้านซ้ายและขวา */
+    background-color: #000; /* กำหนดสีพื้นหลังปุ่มเป็นสีดำ */
+    color: #fff; /* กำหนดสีตัวอักษรปุ่มเป็นสีขาว */
+    text-decoration: none; /* ยกเลิกการขีดเส้นใต้ของลิงก์ */
+    border-radius: 5px; /* กำหนดมุมของปุ่มให้มน */
+    font-size: 18px; /* กำหนดขนาดตัวอักษรเป็น 18px */
+    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็นมือเมื่อชี้ไปที่ปุ่ม */
+    transition: background-color 0.3s; /* กำหนดการเปลี่ยนสีพื้นหลังเมื่อมีการโฮเวอร์ใช้เวลา 0.3 วินาที */
+}
+
+.explore-btn:hover {
+    background-color: #333; /* เปลี่ยนสีพื้นหลังเป็นสีเทาเข้มเมื่อโฮเวอร์ */
+}
+
+/* ---------FOOTER-------- */
+footer {
+    background-color: #222; /* กำหนดสีพื้นหลังของฟุตเตอร์เป็นสีดำเข้ม */
+    padding: 40px; /* กำหนดระยะห่างภายในเป็น 40px */
+    border-top: 1px solid #ddd; /* สร้างเส้นแบ่งด้านบนเป็นสีเทาอ่อน */
+    display: flex; /* ใช้ Flexbox สำหรับการจัดเรียงองค์ประกอบภายใน */
+    justify-content: center; /* จัดตำแหน่งให้อยู่กลางในแนวนอน */
+    align-items: flex-start; /* จัดตำแหน่งให้เริ่มที่ด้านบนในแนวตั้ง */
+    gap: 40px; /* กำหนดระยะห่างระหว่างคอลัมน์ */
+    flex-wrap: wrap; /* อนุญาตให้คอลัมน์ถูกห่อหุ้มในบรรทัดใหม่เมื่อไม่มีที่ว่าง */
+}
+
+.footer-column {
+    flex: 1 1 150px; /* อนุญาตให้คอลัมน์มีความกว้างขั้นต่ำ 150px และจะขยายได้ตามที่มีพื้นที่ */
+    max-width: 200px; /* กำหนดความกว้างสูงสุดที่ 200px */
+}
+
+.footer-column h3 {
+    font-size: 1.2em; /* กำหนดขนาดตัวอักษรเป็น 1.2 เท่าของขนาดมาตรฐาน */
+    color: #333; /* กำหนดสีตัวอักษรเป็นสีเทาเข้ม */
+    margin-bottom: 15px; /* กำหนดระยะห่างด้านล่างเป็น 15px */
+    font-weight: bold; /* กำหนดความหนาของตัวอักษรให้หนา */
+}
+
+.footer-column ul {
+    list-style: none; /* ยกเลิกจุดหรือลักษณะของรายการ */
+}
+
+.footer-column ul li {
+    margin-bottom: 10px; /* กำหนดระยะห่างด้านล่างสำหรับแต่ละรายการเป็น 10px */
+}
+
+.footer-column ul li a {
+    text-decoration: none; /* ยกเลิกการขีดเส้นใต้ของลิงก์ */
+    color: #666; /* กำหนดสีตัวอักษรของลิงก์เป็นสีเทาเข้ม */
+    font-size: 0.9em; /* กำหนดขนาดตัวอักษรเป็น 0.9 เท่าของขนาดมาตรฐาน */
+    display: block; /* แสดงลิงก์เป็นบล็อกเพื่อให้สามารถกำหนดขนาดได้ */
+}
+
+.footer-column ul li a:hover {
+    color: #333; /* เปลี่ยนสีตัวอักษรของลิงก์เป็นสีเทาเข้มเมื่อโฮเวอร์ */
+}
+
+.footer-bottom {
+    text-align: center; /* จัดตำแหน่งข้อความให้อยู่กลาง */
+    padding: 20px 0; /* กำหนดระยะห่างภายในเป็น 20px ด้านบนและล่าง */
+    background-color: #f5f5f5; /* กำหนดสีพื้นหลังเป็นสีเทาอ่อน */
+    font-size: 0.8em; /* กำหนดขนาดตัวอักษรเป็น 0.8 เท่าของขนาดมาตรฐาน */
+    color: #999; /* กำหนดสีตัวอักษรเป็นสีเทา */
+    width: 100%; /* กำหนดความกว้างเป็น 100% */
+    border-top: 1px solid #ddd; /* สร้างเส้นแบ่งด้านบนเป็นสีเทาอ่อน */
+}
+
+/* ----------scrollbar---------- */
+::-webkit-scrollbar {
+    width: 15px; /* กำหนดความกว้างของ scrollbar เป็น 15px */
+}
+
+::-webkit-scrollbar-track {
+    background: #d1e5ff; /* กำหนดสีพื้นหลังของ scrollbar track เป็นสีฟ้าอ่อน */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#666, #558fda); /* กำหนดสีของ scrollbar thumb เป็นกราเดียนต์จากเทาเข้มไปฟ้า */
+}
+
+
+/* Content Container */
+#content {
+    max-width: 100%; /* กำหนดความกว้างสูงสุดของ #content ให้เป็น 100% ของพื้นที่แม่ */
+    margin: 0 auto; /* จัดตำแหน่งให้อยู่กลางโดยใช้ margin อัตโนมัติซ้ายและขวา */
+    padding: 30px; /* กำหนดระยะห่างภายในเป็น 30px */
+    background-color: #ffffff; /* กำหนดสีพื้นหลังเป็นสีขาว */
+    border-radius: 8px; /* กำหนดมุมให้มน 8px */
+    color: #000000; /* กำหนดสีตัวอักษรเป็นสีดำ */
+    box-shadow: 0px 4px 8px rgba(227, 82, 5, 0.5); /* สร้างเงาให้กับกล่องด้วยค่า X, Y, Blur และสีที่กำหนด */
+}
+
+h2 {
+    font-size: 28px; /* กำหนดขนาดตัวอักษรของ h2 เป็น 28px */
+    color: #333; /* กำหนดสีตัวอักษรเป็นสีเทาเข้ม */
+    margin-bottom: 20px; /* กำหนดระยะห่างด้านล่างเป็น 20px */
+}
+
+#sensorData {
+    display: grid; /* ใช้ Grid layout สำหรับการจัดเรียงภายใน #sensorData */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* กำหนดคอลัมน์ให้มีความกว้างขั้นต่ำ 150px และจะขยายได้เต็มพื้นที่ */
+    gap: 15px; /* กำหนดระยะห่างระหว่างกริดเป็น 15px */
+    text-align: center; /* จัดตำแหน่งข้อความให้อยู่กลาง */
+    font-size: 18px; /* กำหนดขนาดตัวอักษรเป็น 18px */
+    color: #555; /* กำหนดสีตัวอักษรเป็นสีเทา */
+}
+
+.data {
+    padding: 10px; /* กำหนดระยะห่างภายในของ .data เป็น 10px */
+    background-color: #fafafa; /* กำหนดสีพื้นหลังของ .data เป็นสีเทาอ่อน */
+    border-radius: 5px; /* กำหนดมุมให้มน 5px */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* สร้างเงาให้กับ .data */
+}
+
+/* Chart Container */
+#chartContainer {
+    display: grid; /* ใช้ Grid layout สำหรับการจัดเรียงภายใน #chartContainer */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* กำหนดคอลัมน์ให้มีความกว้างขั้นต่ำ 300px */
+    gap: 15px; /* กำหนดระยะห่างระหว่างกริดเป็น 15px */
+    margin: 20px 0; /* กำหนดระยะห่างด้านบนและล่างเป็น 20px */
+}
+
+canvas {
+    width: 100%; /* กำหนดความกว้างของ canvas ให้เต็มที่ */
+    height: 300px; /* กำหนดความสูงของ canvas เป็น 300px */
+    background-color: #ffffff; /* กำหนดสีพื้นหลังของ canvas เป็นสีขาว */
+    border-radius: 8px; /* กำหนดมุมให้มน 8px */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* สร้างเงาให้กับ canvas */
+}
+
+/* Table Styling */
+table {
+    width: 100%; /* กำหนดความกว้างของตารางให้เต็มที่ */
+    border-collapse: collapse; /* รวมเส้นขอบตารางให้เป็นหนึ่งเดียว */
+    background-color: #fff; /* กำหนดสีพื้นหลังของตารางเป็นสีขาว */
+    color: #333; /* กำหนดสีตัวอักษรในตารางเป็นสีเทาเข้ม */
+    margin-top: 20px; /* กำหนดระยะห่างด้านบนของตารางเป็น 20px */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* สร้างเงาให้กับตาราง */
+    border-radius: 8px; /* กำหนดมุมให้มน 8px */
+    overflow: hidden; /* ป้องกันการแสดงผลที่เกินมุมของตาราง */
+}
+
+th, td {
+    padding: 12px; /* กำหนดระยะห่างภายในของ th และ td เป็น 12px */
+    text-align: left; /* จัดตำแหน่งข้อความใน th และ td ทางซ้าย */
+    border-bottom: 1px solid #ddd; /* สร้างเส้นขอบด้านล่างเป็นสีเทาอ่อน */
+}
+
+th {
+    background-color: #333; /* กำหนดสีพื้นหลังของ th เป็นสีเทาเข้ม */
+    color: #fff; /* กำหนดสีตัวอักษรใน th เป็นสีขาว */
+}
